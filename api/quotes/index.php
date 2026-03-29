@@ -24,7 +24,11 @@ switch($method) {
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (count($rows) > 0) {
-            echo json_encode($rows);
+            if ($quote->id) {
+                echo json_encode($rows[0]);
+            } else {
+                echo json_encode($rows);
+            }
         } else {
             echo json_encode(['message' => 'No Quotes Found']);
         }
@@ -82,6 +86,10 @@ switch($method) {
             echo json_encode(['message' => 'category_id Not Found']);
             break;
         }
+        if (!$quote->idExists()) {
+            echo json_encode(['message' => 'No Quotes Found']);
+            break;
+        }
 
         if ($quote->update()) {
             echo json_encode([
@@ -105,10 +113,15 @@ switch($method) {
 
         $quote->id = $data->id;
 
+        if (!$quote->idExists()) {
+            echo json_encode(['message' => 'No Quotes Found']);
+            break;
+        }
+
         if ($quote->delete()) {
             echo json_encode(['id' => $quote->id]);
         } else {
             echo json_encode(['message' => 'No Quotes Found']);
         }
-        break;
+    break;
 }

@@ -91,4 +91,11 @@ class Quote {
         $stmt->execute();
         return $stmt->rowCount() > 0;
     }
+
+    public function idExists() {
+        $stmt = $this->conn->prepare("SELECT id FROM quotes WHERE id = :id");
+        $stmt->bindParam(':id', $this->id);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
 }

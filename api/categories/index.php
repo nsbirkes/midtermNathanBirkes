@@ -21,7 +21,11 @@ switch($method) {
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (count($rows) > 0) {
-            echo json_encode($rows);
+            if ($category->id) {
+                echo json_encode($rows[0]);
+            } else {
+                echo json_encode($rows);
+            }
         } else {
             echo json_encode(['message' => 'category_id Not Found']);
         }
