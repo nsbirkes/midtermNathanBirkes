@@ -2,7 +2,7 @@
 
 **Author:** Nathan Birkes
 
-**Project Link:** https://midterm-nathan-birkes.onrender.com
+**Project Link:** https://midtermnathanbirkes.onrender.com/
 
 ## Description
 A PHP OOP REST API for managing quotes, authors, and categories.
